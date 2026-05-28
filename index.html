@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Jennifer Carly Aesthetic Medicine - Clinic Catalyst Proposal</title>
+<link rel="icon" type="image/png" href="https://clinic-catalyst-au.github.io/cc-report-template/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --dark: #0A2A28;
+  --dark-alt: #0D3D38;
+  --teal: #00B4A0;
+  --teal-bright: #00D4BC;
+  --peach: #E8A87C;
+  --peach-light: #F5C7A0;
+  --white: #FFFFFF;
+  --text-faint: rgba(255,255,255,0.6);
+  --text-mid: rgba(255,255,255,0.85);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Open Sans',sans-serif; background:#000; color:var(--white); overflow:hidden; }
+
+.deck { height:100vh; overflow-y:auto; scroll-snap-type:y mandatory; }
+.slide { height:100vh; scroll-snap-align:start; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+.slide-html { padding:3rem 4rem; background:linear-gradient(160deg, #0A2A28 0%, #0E3D3A 40%, #0A2A28 100%); }
+.slide-html.alt { background:linear-gradient(160deg, #0D3D38 0%, #0A2A28 50%, #0D3D38 100%); }
+.slide-html.teal-bg { background:linear-gradient(135deg, #073B36 0%, #0A2A28 100%); }
+.inner { max-width:1100px; width:100%; position:relative; z-index:2; }
+
+.dot-overlay { position:absolute; inset:0; opacity:0.05; background-image:radial-gradient(circle,var(--teal) 1px,transparent 1px); background-size:50px 50px; pointer-events:none; }
+.glow { position:absolute; width:500px; height:500px; border-radius:50%; background:radial-gradient(circle,rgba(0,180,160,0.12) 0%,transparent 70%); pointer-events:none; }
+.glow-tl { top:-200px; left:-200px; }
+.glow-br { bottom:-200px; right:-200px; }
+.glow-center { top:50%; left:50%; transform:translate(-50%,-50%); width:800px; height:800px; }
+
+.label { font-family:'Montserrat',sans-serif; font-size:0.65rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal-bright); margin-bottom:0.75rem; }
+.label-peach { color:var(--peach); }
+h2 { font-family:'Montserrat',sans-serif; font-size:clamp(1.4rem,3vw,2.2rem); font-weight:800; text-transform:uppercase; line-height:1.1; margin-bottom:1rem; }
+h3 { font-family:'Montserrat',sans-serif; font-size:1rem; font-weight:700; text-transform:uppercase; margin-bottom:0.6rem; }
+.teal { color:var(--teal-bright); }
+.peach { color:var(--peach); }
+p { font-size:0.9rem; color:var(--text-mid); font-weight:300; line-height:1.8; }
+
+.split { display:grid; grid-template-columns:2fr 3fr; gap:3rem; align-items:center; }
+.split-even { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:center; }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.2rem; }
+.grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem; }
+.mt-1 { margin-top:1rem; }
+.mt-2 { margin-top:2rem; }
+
+.task-num { font-family:'Montserrat',sans-serif; font-size:0.6rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--peach); display:inline-block; border:1px solid rgba(232,168,124,0.3); padding:0.25rem 0.7rem; border-radius:4px; margin-bottom:0.8rem; }
+.quote { border-left:3px solid var(--peach); padding:0.8rem 1.2rem; margin-bottom:1.5rem; background:rgba(232,168,124,0.04); border-radius:0 6px 6px 0; }
+.quote p { font-style:italic; color:var(--peach-light); font-size:1rem; line-height:1.5; }
+
+.card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:8px; padding:1.3rem; }
+.card h4 { font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--teal-bright); margin-bottom:0.4rem; }
+.card p { font-size:0.8rem; color:var(--text-faint); line-height:1.6; }
+
+.stat { text-align:center; padding:0.8rem; }
+.stat-number { font-family:'Montserrat',sans-serif; font-size:clamp(1.6rem,3vw,2.4rem); font-weight:900; color:var(--teal-bright); }
+.stat-label { font-size:0.68rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.1em; margin-top:0.2rem; font-family:'Montserrat',sans-serif; font-weight:600; }
+
+.price-card { background:rgba(0,180,160,0.06); border:2px solid var(--teal); border-radius:12px; padding:2rem; text-align:center; }
+.price-tag { font-family:'Montserrat',sans-serif; font-size:clamp(2rem,4vw,3rem); font-weight:900; color:var(--teal-bright); }
+.price-period { font-size:0.75rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.1em; }
+.includes-list { list-style:none; text-align:left; margin-top:1.2rem; }
+.includes-list li { padding:0.35rem 0; font-size:0.78rem; color:var(--text-mid); border-bottom:1px solid rgba(255,255,255,0.04); display:flex; align-items:center; gap:0.4rem; }
+.includes-list li::before { content:"\2713"; color:var(--teal-bright); font-weight:700; }
+.discount-badge { display:inline-block; background:var(--peach); color:var(--dark); font-family:'Montserrat',sans-serif; font-size:0.7rem; font-weight:800; padding:0.35rem 0.9rem; border-radius:4px; text-transform:uppercase; letter-spacing:0.06em; margin-top:1rem; }
+
+.faq-item { padding:0.8rem 0; border-bottom:1px solid rgba(255,255,255,0.05); }
+.faq-q { font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; color:var(--peach); margin-bottom:0.3rem; }
+.faq-a { font-size:0.8rem; color:var(--text-faint); }
+
+.scroll-arrow { position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%); text-align:center; z-index:10; animation:bounce 2s infinite; cursor:pointer; }
+.scroll-arrow span { display:block; font-family:'Montserrat',sans-serif; font-size:0.6rem; font-weight:600; color:rgba(255,255,255,0.4); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:0.4rem; }
+.scroll-arrow .arrow { font-size:1.8rem; color:var(--teal-bright); }
+@keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+.sig-line { border-bottom:1px solid rgba(255,255,255,0.25); padding-bottom:0.5rem; margin-top:2rem; min-width:220px; display:inline-block; }
+.sig-label { font-size:0.65rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.1em; margin-top:0.3rem; }
+
+.slide-counter { position:fixed; bottom:1.2rem; right:1.5rem; font-family:'Montserrat',sans-serif; font-size:0.65rem; font-weight:600; color:rgba(255,255,255,0.25); letter-spacing:0.08em; z-index:100; }
+.nav-hint { position:fixed; bottom:1.2rem; left:1.5rem; font-family:'Montserrat',sans-serif; font-size:0.55rem; color:rgba(255,255,255,0.15); letter-spacing:0.08em; z-index:100; }
+
+/* COVER HERO */
+.cover-hero { text-align:center; }
+.cover-hero .wordmark { height:40px; margin-bottom:3rem; opacity:0.9; }
+.cover-hero .clinic-logo { height:70px; margin-bottom:1.5rem; border-radius:8px; }
+.cover-hero h1 { font-family:'Montserrat',sans-serif; font-weight:900; font-size:clamp(2rem,4vw,3.2rem); text-transform:uppercase; letter-spacing:2px; line-height:1.1; margin-bottom:0.5rem; }
+.cover-hero .sub { font-family:'Montserrat',sans-serif; font-weight:600; font-size:1rem; color:var(--teal); text-transform:uppercase; letter-spacing:4px; margin-bottom:2.5rem; }
+.cover-hero .date { font-size:0.85rem; color:var(--text-faint); margin-bottom:0.3rem; }
+.cover-hero .prepared { font-size:0.7rem; color:rgba(255,255,255,0.35); letter-spacing:2px; text-transform:uppercase; }
+.cover-hero .prepared strong { color:var(--teal-bright); font-weight:600; }
+
+/* PROCESS STEP */
+.process-step { display:flex; align-items:flex-start; gap:1rem; margin-bottom:1.5rem; }
+.step-num { font-family:'Montserrat',sans-serif; font-weight:900; font-size:1.8rem; color:var(--teal-bright); line-height:1; min-width:2.5rem; }
+.step-content h4 { font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--white); margin-bottom:0.25rem; }
+.step-content p { font-size:0.78rem; color:var(--text-faint); line-height:1.5; }
+
+/* PHOTO */
+.team-photo { width:100%; border-radius:12px; object-fit:cover; object-position:center top; border:2px solid rgba(0,180,160,0.2); }
+.team-photo-sm { width:100%; max-width:300px; border-radius:10px; object-fit:cover; }
+
+/* WIN ITEM */
+.win-item { display:flex; align-items:flex-start; gap:0.6rem; margin-bottom:0.8rem; }
+.win-check { color:var(--teal-bright); font-weight:700; flex-shrink:0; margin-top:2px; }
+.win-text { font-size:0.82rem; color:var(--text-mid); line-height:1.5; }
+
+/* VS LAYOUT */
+.vs-col { padding:1.5rem; border-radius:10px; }
+.vs-us { background:rgba(0,180,160,0.08); border:1px solid rgba(0,180,160,0.2); }
+.vs-you { background:rgba(232,168,124,0.06); border:1px solid rgba(232,168,124,0.2); }
+
+/* SERVICE MINI CARD */
+.service-mini { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:10px; padding:1.5rem; text-align:center; transition:border-color 0.2s; }
+.service-mini:hover { border-color:var(--teal); }
+.service-mini .s-icon { font-size:2rem; margin-bottom:0.6rem; }
+.service-mini h4 { font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--white); margin-bottom:0.3rem; }
+.service-mini .s-price { font-family:'Montserrat',sans-serif; font-weight:900; font-size:1.4rem; color:var(--teal-bright); margin:0.4rem 0; }
+.service-mini .s-period { font-size:0.6rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.1em; }
+.service-mini p { font-size:0.7rem; margin-top:0.5rem; }
+
+/* BUILT TILE */
+.built-tile { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:1rem 1.2rem; }
+.built-tile .bt-icon { font-size:1.3rem; margin-bottom:0.4rem; }
+.built-tile h4 { font-family:'Montserrat',sans-serif; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--teal-bright); margin-bottom:0.2rem; }
+.built-tile p { font-size:0.72rem; color:var(--text-faint); line-height:1.4; margin:0; }
+
+@media print {
+  .deck { overflow:visible; scroll-snap-type:none; }
+  .slide { min-height:100vh; page-break-after:always; }
+  .slide-counter, .nav-hint { display:none; }
+}
+@media (max-width:768px) {
+  .slide { min-height:100vh; padding:2rem 1.2rem; }
+  .slide-html { padding:2rem 1.2rem; }
+  .split, .split-even, .grid-2, .grid-3, .grid-4 { grid-template-columns:1fr; gap:1rem; }
+  [style*="grid-template-columns"] { grid-template-columns:1fr !important; gap:1rem !important; }
+  h2 { font-size:1.2rem; }
+  .cover-hero h1 { font-size:1.6rem; }
+  .scroll-arrow { display:none; }
+  .slide-counter { display:none; }
+}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- ========== 1. COVER ========== -->
+<section class="slide slide-html" style="background:radial-gradient(ellipse at center, #0E3D3A 0%, #0A2A28 60%, #071E1C 100%);">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-center"></div>
+  <div class="inner cover-hero">
+    <img src="assets/cc-reel-logo.png" alt="Clinic Catalyst" class="wordmark">
+    <h1>You look after the<br>skin transformations.<br><span class="teal">We handle the rest.</span></h1>
+    <p style="max-width:500px; margin:1.5rem auto 2.5rem; font-size:1rem; color:var(--text-mid);">Prepared for Jennifer Carly Aesthetic Medicine</p>
+    <p class="date">29 May 2026</p>
+    <p class="prepared">By <strong>Kelly Wotherspoon</strong> & <strong>Alicia Hagen</strong></p>
+  </div>
+  <div class="scroll-arrow" onclick="document.getElementById('deck').scrollBy({top:window.innerHeight,behavior:'smooth'})">
+    <span>Click to begin</span>
+    <div class="arrow">&#8595;</div>
+  </div>
+</section>
+
+<!-- ========== 2. SOCIAL PROOF ========== -->
+<section class="slide slide-html alt">
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <div class="split-even">
+      <div>
+        <p class="label label-peach">What We Actually Do</p>
+        <h2>The Hats We<br><span class="teal">Take Off You</span></h2>
+        <p style="margin-bottom:1.2rem;">So you're not in your DMs at 9pm.</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem;">
+          <div style="display:flex; gap:0.5rem; font-size:0.78rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> Ad creative - you film it, we build it</div>
+          <div style="display:flex; gap:0.5rem; font-size:0.78rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> Ad copy - we write it</div>
+          <div style="display:flex; gap:0.5rem; font-size:0.78rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> Ad strategy - we run it</div>
+          <div style="display:flex; gap:0.5rem; font-size:0.78rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> Leads - caught within 5 minutes</div>
+          <div style="display:flex; gap:0.5rem; font-size:0.78rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> After hours - covered</div>
+          <div style="display:flex; gap:0.5rem; font-size:0.78rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> CRM - set up and run</div>
+          <div style="display:flex; gap:0.5rem; font-size:0.78rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> Nurture - automated email, SMS, DMs</div>
+          <div style="display:flex; gap:0.5rem; font-size:0.78rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> Brand strategy - handled</div>
+          <div style="display:flex; gap:0.5rem; font-size:0.78rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> GEO / AI search - sorted</div>
+        </div>
+        <p style="font-size:0.7rem; color:var(--text-faint); margin-top:0.8rem; font-style:italic;">Social media management is available as a separate add-on.</p>
+        <p class="mt-1" style="font-size:0.85rem; color:var(--peach-light); font-weight:600;">The only hat left is the one you actually want to wear - the practitioner.</p>
+      </div>
+      <div>
+        <img src="assets/cc-conference-stage.jpg" alt="Kelly and Alicia presenting at conference" class="team-photo" style="max-height:420px;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SOCIAL PROOF - BRAND LOGOS ========== -->
+<section class="slide" style="padding:0; background:#000;">
+  <img src="assets/social-proof.png" alt="Clinics we've worked with" style="width:100%; height:100%; object-fit:contain;">
+</section>
+
+<!-- ========== 3. WHAT YOU'VE BUILT ========== -->
+<section class="slide slide-html">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-br"></div>
+  <div class="inner">
+    <div class="split" style="grid-template-columns:1fr 2fr; gap:2.5rem;">
+      <div style="text-align:center;">
+        <p class="label label-peach">Your clinic right now</p>
+        <h2 style="font-size:clamp(1.2rem,2.5vw,1.8rem);">What You've <span class="teal">Built Already</span></h2>
+        <p style="font-size:0.8rem; margin-top:0.5rem;">You've done a lot of the hard work. Here's what's already working for you.</p>
+        <img src="assets/jennifer-carly.png" alt="Jennifer Carly" class="team-photo" style="max-height:220px; margin-top:1rem; width:auto; border-radius:12px; object-fit:cover; object-position:center top;">
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+        <div class="card" style="display:flex; gap:0.8rem; align-items:flex-start; padding:1rem;"><span style="color:var(--teal-bright); font-size:1.1rem; font-weight:700; flex-shrink:0;">&#10003;</span><p style="font-size:0.82rem; color:var(--text-mid); line-height:1.5; margin:0;">196 new clients from marketing in just 4 months (Jan-April) - your ads ARE working</p></div>
+        <div class="card" style="display:flex; gap:0.8rem; align-items:flex-start; padding:1rem;"><span style="color:var(--teal-bright); font-size:1.1rem; font-weight:700; flex-shrink:0;">&#10003;</span><p style="font-size:0.82rem; color:var(--text-mid); line-height:1.5; margin:0;">Recovered capacity from 35-40% to ~80% post-Maple - real momentum building</p></div>
+        <div class="card" style="display:flex; gap:0.8rem; align-items:flex-start; padding:1rem;"><span style="color:var(--teal-bright); font-size:1.1rem; font-weight:700; flex-shrink:0;">&#10003;</span><p style="font-size:0.82rem; color:var(--text-mid); line-height:1.5; margin:0;">$185/day on Google + Meta already driving real traffic - investment is there, now optimise it</p></div>
+        <div class="card" style="display:flex; gap:0.8rem; align-items:flex-start; padding:1rem;"><span style="color:var(--teal-bright); font-size:1.1rem; font-weight:700; flex-shrink:0;">&#10003;</span><p style="font-size:0.82rem; color:var(--text-mid); line-height:1.5; margin:0;">Specialist therapists with clear skills - needling, Morpheus, CO2 - ready to be showcased individually</p></div>
+        <div class="card" style="display:flex; gap:0.8rem; align-items:flex-start; padding:1rem;"><span style="color:var(--teal-bright); font-size:1.1rem; font-weight:700; flex-shrink:0;">&#10003;</span><p style="font-size:0.82rem; color:var(--text-mid); line-height:1.5; margin:0;">Dedicated front of house handling leads within the hour - speed to lead already in place</p></div>
+        <div class="card" style="display:flex; gap:0.8rem; align-items:flex-start; padding:1rem;"><span style="color:var(--teal-bright); font-size:1.1rem; font-weight:700; flex-shrink:0;">&#10003;</span><p style="font-size:0.82rem; color:var(--text-mid); line-height:1.5; margin:0;">Birthday remarketing already running with its own landing page and ad spend - smart foundations</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TASK 1 - OFFER & PRICING ========== -->
+<section class="slide slide-html alt">
+  <div class="glow glow-br"></div>
+  <div class="inner">
+    <div class="split">
+      <div>
+        <span class="task-num">Task One</span>
+        <h2>Offer & <span class="teal">Pricing Strategy</span></h2>
+        <div class="quote"><p>"two and a half hours, $100 deposit - that's intimidating for someone who's never been"</p></div>
+        <ul style="list-style:none; padding:0; margin:0;">
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Lead with the problem, not the machine - "fix sagging skin" not "Morpheus 8"</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Entry-point offers under $500 - small area, clear price, no guesswork</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> One offer, one button, one outcome per landing page</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Small treatment gets them in the door - therapist upsells in-room</li>
+        </ul>
+      </div>
+      <div>
+        <img src="assets/jc-ads-combined.png" alt="Ad mockups" style="width:100%; border-radius:8px;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TASK 2 - WEBSITE QUICK WINS ========== -->
+<section class="slide slide-html">
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <div class="split">
+      <div>
+        <span class="task-num">Task Two</span>
+        <h2>Website <span class="teal">Quick Wins</span></h2>
+        <div class="quote"><p>"15 treatments on one page - they don't know which to pick, so they leave"</p></div>
+        <ul style="list-style:none; padding:0; margin:0;">
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Simplify homepage to 2-3 clear pathways - "Not sure? Book a consult" / "Ready? Choose your treatment"</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Move before-and-after results above the fold - proof first, details second</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Add a "General Treatment Consultation" as a standalone booking - one click, no overwhelm</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Reinstate skin and body B&As - AHPRA only restricts injectables, not skin</li>
+        </ul>
+      </div>
+      <div>
+        <div class="browser-frame">
+          <div class="browser-bar"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span></div>
+          <img src="assets/jc-website-hero.png" alt="Jennifer Carly website" style="width:100%; display:block;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 8. TASK 3 - CRM & SYSTEMS ========== -->
+<section class="slide slide-html alt">
+  <div class="glow glow-br"></div>
+  <div class="inner">
+    <div class="split">
+      <div>
+        <span class="task-num">Task Three</span>
+        <h2>CRM & <span class="teal">Nurture Sequences</span></h2>
+        <div class="quote"><p>"We're losing so many clients just from not having systems in place."</p></div>
+        <ul style="list-style:none; padding:0; margin:0;">
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Reactivation campaign for clients who haven't rebooked in 60-120 days</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Standardised 3-step follow-up: call, SMS, SMS with opt-out</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Automated nurture sequences - newsletters, birthday offers, post-treatment</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Consult-to-treatment conversion tracking</li>
+        </ul>
+      </div>
+      <div>
+        <div class="browser-frame">
+          <div class="browser-bar"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span></div>
+          <img src="assets/crm-nurture-mockup.png" alt="CRM and nurture sequence" style="width:100%; display:block;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 9. TASK 4 - TECH STACK ========== -->
+<section class="slide slide-html">
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <div class="split">
+      <div>
+        <span class="task-num">Task Four</span>
+        <h2>Tech Stack & <span class="teal">Operations</span></h2>
+        <div class="quote"><p>"I can't even see my own Ads Manager - they just send me a report once a month."</p></div>
+        <ul style="list-style:none; padding:0; margin:0;">
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Your own Meta Ads login - see performance anytime, not just a monthly PDF</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Direct Timely booking links per treatment - skip the overwhelm pages</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> CRM as the central hub - leads, follow-ups, nurture, reporting all in one place</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Plug the leaks - no more leads falling between Timely, email, DMs and spreadsheets</li>
+        </ul>
+      </div>
+      <div>
+        <div class="browser-frame">
+          <div class="browser-bar"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span></div>
+          <img src="assets/systems-ecosystem.png" alt="Connected systems" style="width:100%; display:block;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TASK 5 - SKIN ASSESSMENT LEAD CAPTURE ========== -->
+<section class="slide slide-html alt">
+  <div class="glow glow-br"></div>
+  <div class="inner">
+    <div class="split">
+      <div>
+        <span class="task-num">Task Five</span>
+        <h2>Skin Assessment <span class="teal">Lead Capture</span></h2>
+        <div class="quote"><p>"Is there an AI that can at least get their contact details?"</p></div>
+        <ul style="list-style:none; padding:0; margin:0;">
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Your own skin assessment quiz - 5-6 questions about their concerns</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Captures name, email, phone - warm lead with concerns mapped before they walk in</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Lives on your website and Instagram bio - works 24/7</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Every lead feeds directly into your CRM and nurture sequence</li>
+        </ul>
+      </div>
+      <div>
+        <div class="browser-frame">
+          <div class="browser-bar"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span></div>
+          <img src="assets/jc-demo-assessment.png" alt="Skin assessment quiz" style="width:100%; display:block;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TASK 6 - AFTER-HOURS AUTOMATION ========== -->
+<section class="slide slide-html">
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <div class="split">
+      <div>
+        <span class="task-num">Task Six</span>
+        <h2>After-Hours <span class="teal">Automation</span></h2>
+        <div class="quote"><p>"We're losing leads after hours - no one's there to respond"</p></div>
+        <ul style="list-style:none; padding:0; margin:0;">
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Same questions every night - pricing, availability, what to expect</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Automated instant responses outside reception hours</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Seamless handoff to your team when the clinic opens</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Your evenings back, zero leads lost</li>
+        </ul>
+      </div>
+      <div>
+        <div class="browser-frame">
+          <div class="browser-bar"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span></div>
+          <img src="assets/after-hours-automation.png" alt="After-hours automation" style="width:100%; display:block;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TASK 7 - PRACTITIONER POSITIONING ========== -->
+<section class="slide slide-html alt">
+  <div class="glow glow-br"></div>
+  <div class="inner">
+    <span class="task-num">Task Seven</span>
+    <h2>Practitioner <span class="teal">Positioning</span></h2>
+    <div class="quote" style="max-width:700px;"><p>"the girls are watching you work - but clients don't know who they are or what they're great at"</p></div>
+    <p style="max-width:700px; margin-bottom:1.5rem;">Your team may have special interests or talents for specific skin concerns - but right now nobody knows. We build each practitioner their own profile, their own content, and their own bookings so clients choose WHO they want to see.</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5rem;">
+      <div class="card" style="text-align:center; padding:1.2rem;">
+        <img src="assets/team-1.png" alt="Team member" style="width:120px; height:120px; border-radius:50%; object-fit:cover; object-position:center top; margin:0 auto 0.8rem; border:2px solid var(--teal);">
+        <h4 style="color:var(--peach); font-size:0.75rem; margin-bottom:0.4rem;">Skin Specialist</h4>
+        <p style="font-size:0.72rem; color:var(--text-faint); line-height:1.5;">Needling, chemical peels, skin rejuvenation. Own content, own landing page, own bookings.</p>
+      </div>
+      <div class="card" style="text-align:center; padding:1.2rem;">
+        <img src="assets/team-2.png" alt="Team member" style="width:120px; height:120px; border-radius:50%; object-fit:cover; object-position:center top; margin:0 auto 0.8rem; border:2px solid var(--teal);">
+        <h4 style="color:var(--peach); font-size:0.75rem; margin-bottom:0.4rem;">Morpheus & Laser</h4>
+        <p style="font-size:0.72rem; color:var(--text-faint); line-height:1.5;">Morpheus 8, CO2 laser, skin tightening. Targeted ads driving directly to their chair.</p>
+      </div>
+      <div class="card" style="text-align:center; padding:1.2rem;">
+        <img src="assets/team-3.png" alt="Team member" style="width:120px; height:120px; border-radius:50%; object-fit:cover; object-position:center top; margin:0 auto 0.8rem; border:2px solid var(--teal);">
+        <h4 style="color:var(--peach); font-size:0.75rem; margin-bottom:0.4rem;">Body Contouring</h4>
+        <p style="font-size:0.72rem; color:var(--text-faint); line-height:1.5;">Evolve X, body sculpting, non-invasive treatments. Dedicated campaign to pay off the machine.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BONUS - PASSWORD-PROTECTED INJECTABLE GALLERY ========== -->
+<section class="slide slide-html teal-bg">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-br"></div>
+  <div class="inner">
+    <div class="split">
+      <div>
+        <span class="task-num" style="border-color:var(--peach); color:var(--peach);">Bonus</span>
+        <h2>Password-Protected <span class="peach">Injectable Gallery</span></h2>
+        <ul style="list-style:none; padding:0; margin:0;">
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> AHPRA restricts public injectable B&As - but not after a consultation</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Hidden gallery page behind a password wall on your website</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Password shared after consult (even telehealth qualifies)</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Builds confidence to proceed - compliant and professional</li>
+          <li style="display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem;"><span style="color:var(--teal-bright); flex-shrink:0;">&#8226;</span> Conversion tool at exactly the right stage of the journey</li>
+        </ul>
+      </div>
+      <div>
+        <div class="browser-frame">
+          <div class="browser-bar"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span></div>
+          <img src="assets/ba-gallery-mockup.png" alt="Password-protected before and after gallery" style="width:100%; display:block;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 11. TRANSITION - THAT'S WHERE WE STEP IN ========== -->
+<section class="slide slide-html teal-bg">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-tl"></div>
+  <div class="glow glow-br"></div>
+  <div class="inner" style="text-align:center;">
+    <p class="label label-peach">Sound familiar?</p>
+    <h2 style="font-size:clamp(1.6rem,4vw,2.8rem); margin-bottom:1.5rem;">Stop Doing Everything <span class="peach">Yourself</span></h2>
+    <p style="max-width:650px; margin:0 auto 2rem; font-size:1rem;">Campaign ideas. Lead follow-up. After-hours messages. Newsletters. Review requests. You shouldn't be juggling all of this between clients.</p>
+    <h2 style="font-size:clamp(1.2rem,3vw,2rem);">That's Where <span class="teal">We Step In</span></h2>
+    <p style="max-width:600px; margin:1rem auto 0; font-size:0.85rem;">Our system gets you new leads, follows them up with SMS, email and calls, takes a deposit to secure their booking, and gets them through the door.</p>
+  </div>
+</section>
+
+<!-- ========== 12. CLIENT LIFECYCLE ========== -->
+<section class="slide slide-html alt">
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <p class="label">The Full Client Lifecycle</p>
+    <h2>No One Falls <span class="teal">Through the Cracks</span></h2>
+    <div class="grid-3 mt-2">
+      <div class="vs-col vs-us" style="border-radius:10px;">
+        <h3 style="color:var(--teal-bright); font-size:0.8rem; margin-bottom:1.2rem;">Before They Book</h3>
+        <div class="win-item"><span class="win-check">&#10003;</span><span class="win-text">Ads, content, lead capture</span></div>
+        <div class="win-item"><span class="win-check">&#10003;</span><span class="win-text">5-minute response time</span></div>
+        <div class="win-item"><span class="win-check">&#10003;</span><span class="win-text">Nurture sequences until they book</span></div>
+      </div>
+      <div class="vs-col" style="background:rgba(232,168,124,0.06); border:1px solid rgba(232,168,124,0.2); border-radius:10px;">
+        <h3 style="color:var(--peach); font-size:0.8rem; margin-bottom:1.2rem;">While They're a Client</h3>
+        <div class="win-item"><span class="win-check" style="color:var(--peach);">&#10003;</span><span class="win-text">Treatment reminders</span></div>
+        <div class="win-item"><span class="win-check" style="color:var(--peach);">&#10003;</span><span class="win-text">Education content</span></div>
+        <div class="win-item"><span class="win-check" style="color:var(--peach);">&#10003;</span><span class="win-text">Positioning the clinic as the expert</span></div>
+      </div>
+      <div class="vs-col vs-us" style="border-radius:10px;">
+        <h3 style="color:var(--teal-bright); font-size:0.8rem; margin-bottom:1.2rem;">After Treatment</h3>
+        <div class="win-item"><span class="win-check">&#10003;</span><span class="win-text">Birthday campaigns</span></div>
+        <div class="win-item"><span class="win-check">&#10003;</span><span class="win-text">Re-engagement sequences</span></div>
+        <div class="win-item"><span class="win-check">&#10003;</span><span class="win-text">Upsell and cross-sell</span></div>
+        <div class="win-item"><span class="win-check">&#10003;</span><span class="win-text">Referral nudges</span></div>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:1.5rem; font-size:0.9rem; color:var(--peach-light); font-weight:600;">Your clients are nurtured into the clinic, throughout their treatment, and kept coming back.</p>
+  </div>
+</section>
+
+<!-- ========== 13. HOW IT WORKS - CAMPAIGN PROCESS ========== -->
+<section class="slide slide-html">
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <p class="label">How it works</p>
+    <h2>From Stranger <span class="teal">to Booked Client</span></h2>
+    <p style="max-width:700px; margin-bottom:2rem;">Client responds to your ad on Facebook or Instagram. They supply their details in exchange for your offer. From there, everything is automated.</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:1.2rem;">
+      <div class="card" style="text-align:center; padding:1rem;">
+        <img src="assets/campaign-ad.png" alt="Campaign" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:6px; margin-bottom:0.8rem;">
+        <h4>Campaign</h4>
+        <p>Targeted ad with a compelling offer reaches your ideal client</p>
+      </div>
+      <div class="card" style="text-align:center; padding:1rem;">
+        <img src="assets/campaign-crm.png" alt="Into CRM" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:6px; margin-bottom:0.8rem;">
+        <h4>Into CRM</h4>
+        <p>Lead details captured instantly - name, phone, email - entered into your system</p>
+      </div>
+      <div class="card" style="text-align:center; padding:1rem;">
+        <img src="assets/campaign-followup.png" alt="Follow Up" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:6px; margin-bottom:0.8rem;">
+        <h4>5-Day Follow Up</h4>
+        <p>Automated SMS, email and call sequences if they don't book immediately</p>
+      </div>
+      <div class="card" style="text-align:center; padding:1rem;">
+        <img src="assets/campaign-booked.png" alt="Booked" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:6px; margin-bottom:0.8rem;">
+        <h4 style="color:var(--peach);">Booked</h4>
+        <p>Deposit taken, appointment confirmed, client walks through your door</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SYSTEMS INSTALLED ========== -->
+<section class="slide slide-html alt">
+  <div class="glow glow-br"></div>
+  <div class="inner">
+    <div class="split-even" style="margin-bottom:1.5rem;">
+      <div>
+        <p class="label">What you walk away with</p>
+        <h2>Systems <span class="teal">Installed</span></h2>
+        <p>We install systems that just do it - no copy-paste, no manual follow-up, no chasing leads at 9pm.</p>
+      </div>
+      <div>
+        <img src="assets/systems-ecosystem.png" alt="Connected ecosystem" style="width:100%; border-radius:8px;">
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="card" style="padding:1rem; display:flex; gap:1rem; align-items:center;">
+        <img src="assets/systems-leads-booked.png" alt="Leads Booked" style="width:120px; height:120px; object-fit:cover; border-radius:6px; flex-shrink:0;">
+        <div><h4>Leads Booked</h4><p>New enquiries are captured, followed up, and deposited into your calendar - without you touching your phone</p></div>
+      </div>
+      <div class="card" style="padding:1rem; display:flex; gap:1rem; align-items:center;">
+        <img src="assets/systems-nurtured.png" alt="Clients Nurtured" style="width:120px; height:120px; object-fit:cover; border-radius:6px; flex-shrink:0;">
+        <div><h4>Clients Nurtured</h4><p>Automated nurture sequences keep your database warm - newsletters, birthday offers, treatment education</p></div>
+      </div>
+      <div class="card" style="padding:1rem; display:flex; gap:1rem; align-items:center;">
+        <img src="assets/systems-emails.png" alt="Emails Handled" style="width:120px; height:120px; object-fit:cover; border-radius:6px; flex-shrink:0;">
+        <div><h4>Emails & DMs Handled</h4><p>You don't need to answer the same questions all day - the system responds instantly, you focus on treating</p></div>
+      </div>
+      <div class="card" style="padding:1rem; display:flex; gap:1rem; align-items:center;">
+        <img src="assets/systems-afterhours.png" alt="After-Hours" style="width:120px; height:120px; object-fit:cover; border-radius:6px; flex-shrink:0;">
+        <div><h4>After-Hours Covered</h4><p>Enquiries handled outside clinic hours so you're not replying at 9pm - zero leads lost overnight</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 14. THE FULL PACKAGE ========== -->
+<section class="slide slide-html alt">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <div style="text-align:center; margin-bottom:1.5rem;">
+      <p class="label">Everything Included</p>
+      <h2>One Package. <span class="teal">Everything Handled.</span></h2>
+      <p style="max-width:550px; margin:0 auto;">No hidden extras. No nickel-and-diming. This is what you get every single week.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem 2rem; max-width:900px; margin:0 auto;">
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.6rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+        <span style="font-size:0.82rem; color:var(--text-mid); display:flex; align-items:center; gap:0.5rem;"><span style="color:var(--teal-bright);">&#10003;</span> Meta Ads strategy, creative & management</span>
+        <span style="font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; color:var(--text-faint);">Valued at $350/wk</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.6rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+        <span style="font-size:0.82rem; color:var(--text-mid); display:flex; align-items:center; gap:0.5rem;"><span style="color:var(--teal-bright);">&#10003;</span> Ad creative & video content</span>
+        <span style="font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; color:var(--text-faint);">Valued at $300/wk</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.6rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+        <span style="font-size:0.82rem; color:var(--text-mid); display:flex; align-items:center; gap:0.5rem;"><span style="color:var(--teal-bright);">&#10003;</span> Lead calling & SMS to close leads</span>
+        <span style="font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; color:var(--text-faint);">Valued at $250/wk</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.6rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+        <span style="font-size:0.82rem; color:var(--text-mid); display:flex; align-items:center; gap:0.5rem;"><span style="color:var(--teal-bright);">&#10003;</span> Bespoke CRM setup & configured</span>
+        <span style="font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; color:var(--text-faint);">Valued at $200/wk</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.6rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+        <span style="font-size:0.82rem; color:var(--text-mid); display:flex; align-items:center; gap:0.5rem;"><span style="color:var(--teal-bright);">&#10003;</span> Automated nurture sequences (welcome, reactivation, birthday, post-treatment)</span>
+        <span style="font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; color:var(--text-faint);">Valued at $200/wk</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.6rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+        <span style="font-size:0.82rem; color:var(--text-mid); display:flex; align-items:center; gap:0.5rem;"><span style="color:var(--teal-bright);">&#10003;</span> Skin assessment lead capture quiz</span>
+        <span style="font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; color:var(--text-faint);">Valued at $150/wk</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.6rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+        <span style="font-size:0.82rem; color:var(--text-mid); display:flex; align-items:center; gap:0.5rem;"><span style="color:var(--teal-bright);">&#10003;</span> After-hours automation</span>
+        <span style="font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; color:var(--text-faint);">Valued at $150/wk</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.6rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+        <span style="font-size:0.82rem; color:var(--text-mid); display:flex; align-items:center; gap:0.5rem;"><span style="color:var(--teal-bright);">&#10003;</span> Automated review collection</span>
+        <span style="font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; color:var(--text-faint);">Valued at $100/wk</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.6rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+        <span style="font-size:0.82rem; color:var(--text-mid); display:flex; align-items:center; gap:0.5rem;"><span style="color:var(--teal-bright);">&#10003;</span> Newsletters & re-engagement campaigns</span>
+        <span style="font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; color:var(--text-faint);">Valued at $150/wk</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.6rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+        <span style="font-size:0.82rem; color:var(--text-mid); display:flex; align-items:center; gap:0.5rem;"><span style="color:var(--teal-bright);">&#10003;</span> Social media strategy revised monthly</span>
+        <span style="font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; color:var(--text-faint);">Valued at $150/wk</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.6rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+        <span style="font-size:0.82rem; color:var(--text-mid); display:flex; align-items:center; gap:0.5rem;"><span style="color:var(--teal-bright);">&#10003;</span> Local SEO & Google Business monthly assessment</span>
+        <span style="font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; color:var(--text-faint);">Valued at $150/wk</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.6rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+        <span style="font-size:0.82rem; color:var(--text-mid); display:flex; align-items:center; gap:0.5rem;"><span style="color:var(--teal-bright);">&#10003;</span> GEO / AI search optimisation</span>
+        <span style="font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; color:var(--text-faint);">Valued at $100/wk</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.6rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+        <span style="font-size:0.82rem; color:var(--text-mid); display:flex; align-items:center; gap:0.5rem;"><span style="color:var(--teal-bright);">&#10003;</span> Reporting dashboard</span>
+        <span style="font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; color:var(--text-faint);">Valued at $100/wk</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.6rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+        <span style="font-size:0.82rem; color:var(--text-mid); display:flex; align-items:center; gap:0.5rem;"><span style="color:var(--teal-bright);">&#10003;</span> Monthly strategy calls</span>
+        <span style="font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; color:var(--text-faint);">Valued at $100/wk</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.6rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+        <span style="font-size:0.82rem; color:var(--text-mid); display:flex; align-items:center; gap:0.5rem;"><span style="color:var(--teal-bright);">&#10003;</span> Technical setup & ongoing support</span>
+        <span style="font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; color:var(--text-faint);">Valued at $100/wk</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== THE INVESTMENT ========== -->
+<section class="slide slide-html teal-bg">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-center" style="opacity:0.1;"></div>
+  <div class="inner" style="text-align:center;">
+    <p class="label label-peach">The Investment</p>
+    <h2>All of This. <span class="peach">One Price.</span></h2>
+    <div style="max-width:500px; margin:1.5rem auto 0;">
+      <!-- Value total -->
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:1rem 1.5rem; border-bottom:1px solid rgba(255,255,255,0.1);">
+        <span style="font-family:'Montserrat',sans-serif; font-size:0.85rem; font-weight:700; color:var(--text-mid);">Total weekly value</span>
+        <span style="font-family:'Montserrat',sans-serif; font-size:1.4rem; font-weight:900; color:var(--text-faint); text-decoration:line-through;">$2,500/wk</span>
+      </div>
+      <!-- Setup fee -->
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.8rem 1.5rem; border-bottom:1px solid rgba(255,255,255,0.1);">
+        <span style="font-family:'Montserrat',sans-serif; font-size:0.85rem; font-weight:700; color:var(--text-mid);">Setup & onboarding</span>
+        <span style="font-family:'Montserrat',sans-serif; font-size:1rem; font-weight:700; color:var(--text-faint); text-decoration:line-through;">$4,997</span>
+      </div>
+      <!-- Your price -->
+      <div style="margin-top:2rem; padding:2rem; background:rgba(0,212,188,0.08); border:2px solid var(--teal-bright); border-radius:12px;">
+        <p style="font-family:'Montserrat',sans-serif; font-size:0.7rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--peach); margin-bottom:0.5rem;">Your Price</p>
+        <div style="font-family:'Montserrat',sans-serif; font-size:clamp(2.5rem,5vw,3.5rem); font-weight:900; color:var(--teal-bright);">$999<span style="font-size:0.4em; color:var(--text-mid); font-weight:600;">/week</span></div>
+        <p style="font-size:0.75rem; color:var(--text-faint); margin-top:0.5rem;">ABM member rate - $4,997 setup fee waived</p>
+        <div style="margin-top:1.2rem; display:inline-block; background:var(--peach); color:var(--dark); font-family:'Montserrat',sans-serif; font-size:0.7rem; font-weight:800; padding:0.4rem 1.2rem; border-radius:4px; text-transform:uppercase; letter-spacing:0.06em;">You save $1,501 every week + $4,997 setup</div>
+      </div>
+      <p style="font-size:0.7rem; color:var(--text-faint); margin-top:1rem; font-style:italic;">Ad spend is separate and paid directly to Meta. We recommend $30/day minimum.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 15. YOUR PART ========== -->
+<section class="slide slide-html">
+  <div class="glow glow-br"></div>
+  <div class="inner">
+    <p class="label label-peach">Team effort</p>
+    <h2>Your Part in <span class="teal">the Success</span></h2>
+    <p style="max-width:700px; margin-bottom:1.5rem;">We can't control every aspect of your business. The overall success comes down to a team effort. Here's what we need from you.</p>
+    <div class="grid-2">
+      <div class="card" style="padding:1rem; display:flex; gap:1rem; align-items:center;">
+        <img src="assets/yourpart-ba.png" alt="Before & Afters" style="width:120px; height:120px; object-fit:cover; border-radius:6px; flex-shrink:0;">
+        <div><h4>Post Before & After Images</h4><p>New leads naturally stalk your profile. It takes 6-9 interactions before someone buys - your B&As do the convincing.</p></div>
+      </div>
+      <div class="card" style="padding:1rem; display:flex; gap:1rem; align-items:center;">
+        <img src="assets/yourpart-experience.png" alt="Deliver" style="width:120px; height:120px; object-fit:cover; border-radius:6px; flex-shrink:0;">
+        <div><h4>Deliver the Experience</h4><p>The system gets them through the door. From there, it's your team's expertise that turns a first visit into a lifelong client.</p></div>
+      </div>
+      <div class="card" style="padding:1rem; display:flex; gap:1rem; align-items:center;">
+        <img src="assets/yourpart-clinic.png" alt="Clinic" style="width:120px; height:120px; object-fit:cover; border-radius:6px; flex-shrink:0;">
+        <div><h4>Create an Experience</h4><p>Is your clinic clean, welcoming, warm? Do clients feel valued? That experience is what turns a first visit into a lifetime client.</p></div>
+      </div>
+      <div class="card" style="padding:1rem; display:flex; gap:1rem; align-items:center;">
+        <img src="assets/yourpart-rebook.png" alt="Rebook" style="width:120px; height:120px; object-fit:cover; border-radius:6px; flex-shrink:0;">
+        <div><h4>Upsell & Rebook</h4><p>Turn bookings into long-term clients. Ask what day works best to rebook - not if they want to. That's where the real revenue lives.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CASE STUDIES - REAL RESULTS ========== -->
+<section class="slide slide-html alt">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-br"></div>
+  <div class="inner">
+    <p class="label">Proven results</p>
+    <h2>Case <span class="teal">Studies</span></h2>
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div class="card" style="padding:1.5rem;">
+        <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.2rem;">
+          <img src="assets/case-study-1-logo.png" alt="Case Study 1" style="height:60px; object-fit:contain; flex-shrink:0;">
+          <p class="label label-peach" style="margin-bottom:0;">Case Study 01</p>
+        </div>
+        <div class="stat-number" style="font-size:1.8rem; margin-bottom:0.5rem;">34% Conversion</div>
+        <p style="font-size:0.85rem; margin-bottom:0.3rem;">on new leads</p>
+        <p style="font-size:0.85rem; margin-bottom:0.3rem;"><span style="color:var(--teal-bright); font-weight:700;">$4,976</span> in new bookings in first 30 days</p>
+        <p style="font-size:0.85rem;"><span style="color:var(--peach); font-weight:700;">$3,537</span> of future bookings</p>
+      </div>
+      <div class="card" style="padding:1.5rem;">
+        <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.2rem;">
+          <img src="assets/case-study-2-logo.png" alt="Case Study 2" style="height:60px; object-fit:contain; flex-shrink:0;">
+          <p class="label label-peach" style="margin-bottom:0;">Case Study 02</p>
+        </div>
+        <div class="stat-number" style="font-size:1.8rem; margin-bottom:0.5rem;">48.48% Conversion</div>
+        <p style="font-size:0.85rem; margin-bottom:0.3rem;"><span style="color:var(--teal-bright); font-weight:700;">$7,652</span> new bookings</p>
+        <p style="font-size:0.85rem;"><span style="color:var(--peach); font-weight:700;">$8,241</span> in future bookings for the Venus device</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== GOALS & OBJECTIVES ========== -->
+<section class="slide slide-html">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <p class="label label-peach">Tailored for Jennifer Carly Aesthetic Medicine</p>
+    <h2>Your Goals & <span class="teal">Objectives</span></h2>
+    <div style="max-width:800px; margin-top:1rem;">
+      <div class="card" style="padding:1.2rem; margin-bottom:0.8rem;"><h4>1. Fill Your Therapists' Books</h4><p>You're at 80% but the girls are watching you work. Targeted campaigns per therapist speciality will drive bookings directly to them.</p></div>
+      <div class="card" style="padding:1.2rem; margin-bottom:0.8rem;"><h4>2. Pay Off the Evolve X</h4><p>Dedicated body campaign with entry-point pricing and a proper landing page funnel to get bums on seats for this machine.</p></div>
+      <div class="card" style="padding:1.2rem; margin-bottom:0.8rem;"><h4>3. Stop Losing Leads</h4><p>Install a CRM with automated follow-up so every lead gets called, texted, and nurtured - no more manual tracking.</p></div>
+      <div class="card" style="padding:1.2rem; margin-bottom:0.8rem;"><h4>4. Hit $160-180K Consistently</h4><p>Close the gap between your best months and your worst. Systems and automation smooth out the revenue dips.</p></div>
+      <div class="card" style="padding:1.2rem;"><h4>5. Launch the New Clinic Strong</h4><p>SEO runway, local awareness campaigns, and Google Business setup so your second location opens with momentum.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BONUS GEO ========== -->
+<section class="slide slide-html teal-bg">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-br"></div>
+  <div class="inner">
+    <div class="split-even">
+      <div>
+        <p class="label label-peach">Sign On Bonus</p>
+        <h2>Bonus <span class="peach">GEO</span></h2>
+        <p>Sign up and Kelly will add GEO coding into your website to get you found on ChatGPT, Claude and other AI search tools.</p>
+        <p class="mt-1" style="font-size:0.8rem;">Normally <span style="text-decoration:line-through; color:var(--text-faint);">$499</span> - <span class="peach" style="font-weight:700;">FREE with your package</span></p>
+      </div>
+      <div>
+        <div class="card" style="background:rgba(0,0,0,0.15); border-color:rgba(255,255,255,0.1);">
+          <h4 style="color:var(--peach); margin-bottom:0.8rem;">What This Means For You</h4>
+          <div style="display:flex; flex-direction:column; gap:0.5rem;">
+            <div style="display:flex; gap:0.5rem; font-size:0.8rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> Show up when they search your speciality + suburb</div>
+            <div style="display:flex; gap:0.5rem; font-size:0.8rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> AI search ready - Claude, ChatGPT, Perplexity</div>
+            <div style="display:flex; gap:0.5rem; font-size:0.8rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> Faster page load and better Google rankings</div>
+            <div style="display:flex; gap:0.5rem; font-size:0.8rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> Compounds over time - unlike paid ads</div>
+            <div style="display:flex; gap:0.5rem; font-size:0.8rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> No redesign needed - works behind the scenes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 21. READY TO START ========== -->
+<section class="slide slide-html" style="background:radial-gradient(ellipse at center, #0E3D3A 0%, #071E1C 100%);">
+  <div class="dot-overlay" style="opacity:0.03;"></div>
+  <div class="glow glow-center" style="opacity:0.12;"></div>
+  <div class="inner" style="text-align:center;">
+    <img src="assets/cc-reel-logo.png" alt="Clinic Catalyst" style="height:36px; margin-bottom:2rem; opacity:0.8;">
+    <h2 style="font-size:clamp(1.8rem,4vw,3rem); margin-bottom:1rem;">You look after the<br>skin transformations.<br><span class="teal">We handle the rest.</span></h2>
+    <p style="max-width:600px; margin:0 auto 2rem; font-size:1rem;">And we don't stop there. Birthday campaigns, education, re-engagement - no client gets forgotten, no lead falls through the cracks.</p>
+    <img src="assets/cc-conference-kelly-slide.jpg" alt="Kelly presenting" style="width:280px; border-radius:12px; border:2px solid rgba(0,180,160,0.2); object-fit:cover; object-position:center top; max-height:200px;">
+    <p style="font-size:0.75rem; color:var(--text-faint); margin-top:1rem;">Kelly Wotherspoon & Alicia Hagen</p>
+  </div>
+</section>
+
+<!-- ========== 22. PROJECT ACCEPTANCE ========== -->
+<section class="slide slide-html">
+  <div class="dot-overlay"></div>
+  <div class="inner">
+    <p class="label">Final step</p>
+    <h2>Project <span class="teal">Acceptance</span></h2>
+    <p style="max-width:700px;">This proposal remains confidential between Mint Peach Media and <strong>Jennifer Carly Aesthetic Medicine</strong> and must not be disclosed to any third party without written approval of Mint Peach Media.</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5rem; margin-top:2rem;">
+      <div class="card">
+        <h4>Agreement</h4>
+        <p>Month by month. No lock-in. 30 days written notice to terminate.</p>
+      </div>
+      <div class="card">
+        <h4>Payment</h4>
+        <p>Management fee billed at the start of each week.</p>
+      </div>
+      <div class="card">
+        <h4>Commencement</h4>
+        <p>Project begins from date initial payment is received.</p>
+      </div>
+    </div>
+    <div style="margin-top:2rem; max-width:600px;">
+      <div style="display:grid; grid-template-columns:2fr 1fr; gap:1.5rem; align-items:end;">
+        <div>
+          <p class="sig-label" style="margin-bottom:0.4rem;">Sign below</p>
+          <div style="position:relative; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; overflow:hidden;">
+            <canvas id="sig-canvas" width="400" height="140" style="width:100%; height:140px; cursor:crosshair; display:block; touch-action:none;"></canvas>
+            <button onclick="clearSig()" style="position:absolute; top:6px; right:6px; background:rgba(255,255,255,0.1); border:none; color:var(--text-faint); font-size:0.6rem; padding:3px 8px; border-radius:3px; cursor:pointer; font-family:'Montserrat',sans-serif;">Clear</button>
+          </div>
+          <input id="sig-name" type="text" placeholder="Full name" style="margin-top:0.6rem; width:100%; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:0.7rem 1rem; font-size:0.85rem; color:var(--white); font-family:'Open Sans',sans-serif; outline:none;">
+        </div>
+        <div>
+          <p class="sig-label" style="margin-bottom:0.4rem;">Date</p>
+          <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:0.8rem 1rem; font-size:0.85rem; color:var(--text-mid);" id="sig-date"></div>
+        </div>
+      </div>
+      <button id="accept-btn" onclick="acceptProposal()" style="margin-top:1.5rem; background:var(--teal-bright); color:var(--dark); border:none; padding:0.9rem 2.5rem; font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; border-radius:6px; cursor:pointer; transition:all 0.2s;">Accept Proposal</button>
+      <div id="accept-confirm" style="display:none; margin-top:1.5rem; padding:1.2rem; background:rgba(0,212,188,0.1); border:1px solid var(--teal); border-radius:8px;">
+        <p style="color:var(--teal-bright); font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.85rem;">Proposal Accepted</p>
+        <p style="font-size:0.8rem; color:var(--text-mid); margin-top:0.3rem;">Thank you! We'll be in touch shortly to get started.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="slide-counter" id="counter">1 / --</div>
+<div class="nav-hint">Arrow keys to navigate &middot; F for fullscreen</div>
+
+<script>
+const deck = document.getElementById('deck');
+const slides = document.querySelectorAll('.slide');
+const counter = document.getElementById('counter');
+const total = slides.length;
+counter.textContent = '1 / ' + total;
+
+function updateCounter() {
+  const current = Math.round(deck.scrollTop / window.innerHeight) + 1;
+  counter.textContent = current + ' / ' + total;
+}
+deck.addEventListener('scroll', updateCounter);
+
+document.addEventListener('keydown', function(e) {
+  const h = window.innerHeight;
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); deck.scrollBy({top:h, behavior:'smooth'}); }
+  if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { e.preventDefault(); deck.scrollBy({top:-h, behavior:'smooth'}); }
+  if (e.key === 'Home') { e.preventDefault(); deck.scrollTo({top:0, behavior:'smooth'}); }
+  if (e.key === 'End') { e.preventDefault(); deck.scrollTo({top:deck.scrollHeight, behavior:'smooth'}); }
+  if (e.key === 'f' || e.key === 'F') {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  }
+});
+
+// Signature
+const canvas = document.getElementById('sig-canvas');
+const ctx = canvas ? canvas.getContext('2d') : null;
+let drawing = false, hasSigned = false;
+if (ctx) {
+  ctx.strokeStyle = '#00D4BC'; ctx.lineWidth = 2; ctx.lineCap = 'round';
+  function getPos(e) { const r = canvas.getBoundingClientRect(); const t = e.touches ? e.touches[0] : e; return { x:(t.clientX-r.left)*(canvas.width/r.width), y:(t.clientY-r.top)*(canvas.height/r.height) }; }
+  canvas.addEventListener('mousedown', e => { drawing=true; hasSigned=true; const p=getPos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); });
+  canvas.addEventListener('mousemove', e => { if(!drawing)return; const p=getPos(e); ctx.lineTo(p.x,p.y); ctx.stroke(); });
+  canvas.addEventListener('mouseup', () => drawing=false);
+  canvas.addEventListener('mouseleave', () => drawing=false);
+  canvas.addEventListener('touchstart', e => { e.preventDefault(); drawing=true; hasSigned=true; const p=getPos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); }, {passive:false});
+  canvas.addEventListener('touchmove', e => { e.preventDefault(); if(!drawing)return; const p=getPos(e); ctx.lineTo(p.x,p.y); ctx.stroke(); }, {passive:false});
+  canvas.addEventListener('touchend', () => drawing=false);
+}
+const dateEl = document.getElementById('sig-date');
+if (dateEl) dateEl.textContent = new Date().toLocaleDateString('en-AU', {day:'numeric', month:'long', year:'numeric'});
+function clearSig() { if(ctx){ctx.clearRect(0,0,canvas.width,canvas.height); hasSigned=false;} }
+function acceptProposal() {
+  const name = document.getElementById('sig-name').value.trim();
+  if (!hasSigned) { alert('Please sign above before accepting.'); return; }
+  if (!name) { alert('Please enter your full name.'); return; }
+  document.getElementById('accept-btn').style.display = 'none';
+  document.getElementById('accept-confirm').style.display = 'block';
+}
+</script>
+</body>
+</html>
